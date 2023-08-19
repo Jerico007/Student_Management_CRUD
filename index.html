@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management CRUD</title>
+    <!-- Font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Css -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <h2 class="heading">Student Management CRUD</h2>
+
+      <form>
+        <input type="text" placeholder="Name" name="name" required value="Jerico"/>
+        <input type="email" name="email" placeholder="Email" required value="xyz@gmail.com"/>
+        <input type="number" name="gpa" placeholder="GPA" required step="any" value="97.5"/>
+        <input type="number" name="age" placeholder="Age" required value="22"/>
+        <input type="text" name="degree" placeholder="Degree" required  value="MCA"/>
+        <button type="submit">Add Student</button>
+      </form>
+      <button type="submit" class="edit-submit">Edit Student</button>
+
+      <div class="search-container">
+        <input
+          type="search"
+          name="search"
+          placeholder="Search By Name, email or degree"
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>GPA</th>
+            <th>Degree</th>
+          </tr>
+        </thead>
+        <tbody>       
+         
+        </tbody>
+      </table>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

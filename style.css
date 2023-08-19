@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 70px;
+  padding: 12px;
+}
+
+.heading {
+  font-family: "Inter", sans-serif;
+}
+
+.form-container {
+  width: 50vw;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+  gap: 25px;
+}
+
+form > * {
+  width: 30vw;
+  height: 50px;
+}
+
+form > button {
+  grid-row-start: 3;
+  grid-column-start: 1;
+  border: 2px solid grey;
+}
+
+.edit-submit{
+    left: 11px;
+    width: 30vw;
+    top: 260px;
+    height: 50px;
+    display: none;
+    z-index: 1;
+    background-color: black;
+    color: white;
+    position: absolute;
+}
+
+input {
+  padding: 12px;
+  border: 2px solid grey;
+  background-color: black;
+  color: white;
+}
+
+.search-container > input {
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid gray;
+}
+
+
+thead {
+  border: 1px solid gray;
+}
+
+th {
+    text-align: left;
+    border: 1px solid gray;
+    padding: 12px;
+}
+
+td{
+    padding: 12px;
+    border-right:1px solid gray;
+}
+
+td:nth-child(6){
+   display: flex;
+   justify-content: space-between;
+}
+
+.edit-buttons{
+    display: flex;
+    gap: 8px;
+}
+
+.edit-buttons button{
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
