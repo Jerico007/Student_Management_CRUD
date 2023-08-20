@@ -14,47 +14,51 @@
         </tr>  */
 }
 
+//Unique Id for Every Student
+let Id = 1;
+//Students database
 const students = [];
+//Creating Search Functionality
+let search = document.getElementsByName("search")[0];
+search.addEventListener("keyup", searchData);
 
+//Adding event Listener to form
+let form = document.getElementsByTagName("form")[0];
+form.addEventListener("submit", extractData);
 
 //Function to Remove Data
 function removeData(event) {
+  if (confirm("Data will get deleted!")) {
     let tr = document.querySelectorAll("tbody tr");
     let tbody = document.getElementsByTagName("tbody")[0];
-    let columnId = event.target.parentElement.parentElement.parentElement.parentElement;
-   
+    let columnId =
+      event.target.parentElement.parentElement.parentElement.parentElement;
 
     // console.log(columnId.children[0].innerText);
     //Removing data from the student array
-    students.forEach((val, index)=>{
-        if(val.Id == columnId.children[0].innerText)
-        {
-            students.splice(index,index+1);
-        }
+    students.forEach((val, index) => {
+      if (val.Id == columnId.children[0].innerText) {
+        students.splice(index, index + 1);
+      }
     });
-    //   console.log(students);
 
-    Array.from(tr).forEach((val)=>{
-        if(val.children[0] === columnId.children[0])
-        {
-            tbody.removeChild(val);
-        }
-    })
+    //Trying to match the column Id of each and every row
+    Array.from(tr).forEach((val) => {
+      if (val.children[0] === columnId.children[0]) {
+        tbody.removeChild(val);
+      }
+    });
+  }
+  return;
 }
-
-
 
 //Function to edit data
 function editData(event) {
-    let columnId =event.target.parentNode.parentNode.parentNode.parentNode;
-    // console.log(columnId.children[0].innerText);
-   console.log(columnId.children);
-    let inputs = document.getElementsByTagName("input");
-    
-    let editButton = document.getElementsByClassName("edit-submit")[0];
-    //Updating data in the array
+  let columnId = event.target.parentNode.parentNode.parentNode.parentNode;
+  let inputs = document.getElementsByTagName("input");
+  let editButton = document.getElementsByClassName("edit-submit")[0];
+  //Showing data into the input
   students.forEach((val) => {
-    // console.log(val);
     if (val.Id == columnId.children[0].innerHTML) {
       inputs[0].value = val.name;
       inputs[1].value = val.email;
@@ -65,34 +69,27 @@ function editData(event) {
   });
 
   editButton.style.display = "block";
-  editButton.addEventListener("click", (e) => {
-  
+  editButton.addEventListener("click", function updateData(e) {
+    //Updating students array with new values(Edited values)
     students.forEach((val) => {
       if (val.Id == columnId.children[0].innerText) {
-        columnId.children[0].innerText = val.Id;
         val.name = inputs[0].value;
-        columnId.children[1].innerText = val.name;
         val.email = inputs[1].value;
-        columnId.children[2].innerText = val.email;
         val.gpa = inputs[2].value;
-        columnId.children[4].innerText = val.gpa;
         val.age = inputs[3].value;
-        columnId.children[3].innerText = val.age;
         val.degree = inputs[4].value;
-        columnId.children[5].children[0].innerHTML = val.degree;
       }
     });
-
-    // students.forEach((val)={
-    //     if(val.Id == )
-    // })
-
-    Array.from(inputs).forEach((val)=>{
-        val.value = "";
-    })
-    // e.target.removeEventListener("click", e);
+    //Adding new Data into table
+    addDataInUI();
+    //Clearing the form
+    Array.from(inputs).forEach((val) => {
+      val.value = "";
+    });
+    //Removing the event listener to avoid logical error
+    e.target.removeEventListener("click", updateData);
+    //Reseting the edit button
     e.target.style.display = "none";
-    // console.log(students);
   });
 }
 
@@ -103,8 +100,7 @@ function searchData(e) {
   let tr = document.querySelectorAll("tbody tr");
   Array.from(tr).forEach((val) => {
     let td = val.getElementsByTagName("td");
-    // console.log(td[1].innerHTML.toLocaleUpperCase().trimStart());
-
+    //Checking if value matches with the data
     if (
       value.toUpperCase().trim() === td[1].innerText.toUpperCase().trim() ||
       value.toUpperCase().trim() === td[2].innerText.toUpperCase().trim() ||
@@ -115,41 +111,50 @@ function searchData(e) {
       val.style.display = "none";
     }
   });
+  //If search value is blank the show all data
   if (value === "") {
     Array.from(tr).forEach((val) => {
       val.style.display = "table-row";
     });
   }
 }
-//Creating Search Functionality
-let search = document.getElementsByName("search")[0];
-search.addEventListener("keyup", searchData);
 
 //Function to add data into UI
 function addDataInUI(obj) {
   let tbody = document.getElementsByTagName("tbody")[0];
-  let tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${obj.Id}</td>
-    <td>${obj.name}</td>
-    <td>${obj.email}</td>
-    <td>${obj.age}</td>
-    <td>${obj.gpa}</td>
-    <td>
-      <p>${obj.degree}</p>
-      <div class="edit-buttons">
-        <button class="edit"><i class="fa-regular fa-pen-to-square" style="color: #f5f5f5;"></i></button><button class="delete"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-      </div>
-    </td>`;
-  tbody.appendChild(tr);
+  tbody.innerHTML = "";
+  students.forEach((val) => {
+    let tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${val.Id}</td>
+      <td>${val.name}</td>
+      <td>${val.email}</td>
+      <td>${val.age}</td>
+      <td>${val.gpa}</td>
+      <td>
+        <p>${val.degree}</p>
+        <div class="edit-buttons">
+          <button class="edit"><i class="fa-regular fa-pen-to-square" style="color: #f5f5f5;"></i></button><button class="delete"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+        </div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  // Adding click Event Listener to edit and Delete buttons
+  let editBtn = document.getElementsByClassName("edit");
+  let deleteBtn = document.getElementsByClassName("delete");
+  Array.from(editBtn).forEach((val) => {
+    val.addEventListener("click", editData);
+  });
+
+  Array.from(deleteBtn).forEach((val) => {
+    val.addEventListener("click", removeData);
+  });
 }
 
-//Unique Id for Every Student
-let Id = 1;
+//Extracting form Data
 function extractData(e) {
   e.preventDefault();
   let element = e.target.children;
-  // console.log(element);
   let obj = { Id: Id };
   Id++;
   Array.from(element).forEach((val) => {
@@ -157,28 +162,12 @@ function extractData(e) {
       obj[val.name] = val.value;
     }
   });
-  // console.log(obj);
+  //Pushing a new student into the student array
   students.push(obj);
-  addDataInUI(obj);
-//   console.log(students);
-//Clearing Form inputs
+  //Adding data into the UI
+  addDataInUI();
+  //Clearing Form inputs
   Array.from(element).forEach((val) => {
     val.value = "";
   });
-
-
-// Adding Event Listener to edit and Delete buttons  
-  let editBtn = document.getElementsByClassName("edit");
-  let deleteBtn = document.getElementsByClassName("delete");
-  Array.from(editBtn).forEach((val) => {
-    val.addEventListener("click", editData);
-  });
-
-  Array.from(deleteBtn).forEach((val)=>{
-    val.addEventListener("click", removeData);
-  })
 }
-
-let form = document.getElementsByTagName("form")[0];
-
-form.addEventListener("submit", extractData);

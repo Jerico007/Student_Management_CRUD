@@ -44,16 +44,10 @@ form > button {
   border: 2px solid grey;
 }
 
-.edit-submit{
-    left: 11px;
-    width: 30vw;
-    top: 260px;
-    height: 50px;
-    display: none;
-    z-index: 1;
-    background-color: black;
-    color: white;
-    position: absolute;
+.edit-submit {
+  display: none;
+  background-color: black;
+  color: white;
 }
 
 input {
@@ -73,34 +67,33 @@ table {
   border: 1px solid gray;
 }
 
-
 thead {
   border: 1px solid gray;
 }
 
 th {
-    text-align: left;
-    border: 1px solid gray;
-    padding: 12px;
+  text-align: left;
+  border: 1px solid gray;
+  padding: 12px;
 }
 
-td{
-    padding: 12px;
-    border-right:1px solid gray;
+td {
+  padding: 12px;
+  border-right: 1px solid gray;
 }
 
-td:nth-child(6){
-   display: flex;
-   justify-content: space-between;
+td:nth-child(6) {
+  display: flex;
+  justify-content: space-between;
 }
 
-.edit-buttons{
-    display: flex;
-    gap: 8px;
+.edit-buttons {
+  display: flex;
+  gap: 8px;
 }
 
-.edit-buttons button{
-    background-color: black;
-    border: none;
-    cursor: pointer;
+.edit-buttons button {
+  background-color: black;
+  border: none;
+  cursor: pointer;
 }
