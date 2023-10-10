@@ -102,9 +102,9 @@ function searchData(e) {
     let td = val.getElementsByTagName("td");
     //Checking if value matches with the data
     if (
-      value.toUpperCase().trim() === td[1].innerText.toUpperCase().trim() ||
-      value.toUpperCase().trim() === td[2].innerText.toUpperCase().trim() ||
-      value.toUpperCase().trim() === td[5].innerText.toUpperCase().trim()
+      value.toUpperCase().trim() === td[1].innerText.toUpperCase().trim().substring(0,value.length) ||
+      value.toUpperCase().trim() === td[2].innerText.toUpperCase().trim().substring(0,value.length) ||
+      value.toUpperCase().trim() === td[5].innerText.toUpperCase().trim().substring(0,value.length)
     ) {
       val.style.display = "table-row";
     } else {
